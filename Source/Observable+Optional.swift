@@ -64,7 +64,7 @@ public extension ObservableType where E: OptionalType {
      - returns: `Observable` of the source `Observable`'s unwrapped elements, with `nil` elements replaced by the handler's returned non-`nil` elements.
      */
     @warn_unused_result(message="http://git.io/rxs.uo")
-    public func catchOnNil(handler: () throws -> Observable<E.Wrapped>) -> Observable<E.Wrapped> {
+    public func catchOnNil(handler: @escaping () throws -> Observable<E.Wrapped>) -> Observable<E.Wrapped> {
         return self.flatMap { element -> Observable<E.Wrapped> in
             guard let value = element.value else {
                 return try handler()

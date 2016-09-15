@@ -25,7 +25,7 @@ public extension ObservableType where E: Occupiable {
      - returns: `Observable` of the source `Observable`'s occupiable elements, with empty occupiable elements replaced by the handler's returned non-empty occupiable elements.
      */
     @warn_unused_result(message="http://git.io/rxs.uo")
-    public func catchOnEmpty(handler: () throws -> Observable<E>) -> Observable<E> {
+    public func catchOnEmpty(handler: @escaping () throws -> Observable<E>) -> Observable<E> {
         return self.flatMap { element -> Observable<E> in
             guard element.isNotEmpty else {
                 return try handler()

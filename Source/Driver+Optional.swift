@@ -41,7 +41,7 @@ public extension Driver where Element: OptionalType {
      - returns: `Driver` of the source `Driver`'s unwrapped elements, with `nil` elements replaced by the handler's returned non-`nil` elements.
      */
     @warn_unused_result(message="http://git.io/rxs.uo")
-    public func catchOnNil(handler: () -> Driver<Element.Wrapped>) -> Driver<Element.Wrapped> {
+    public func catchOnNil(handler: @escaping () -> Driver<Element.Wrapped>) -> Driver<Element.Wrapped> {
         return self.flatMap { element -> Driver<Element.Wrapped> in
             guard let value = element.value else {
                 return handler()

@@ -44,7 +44,7 @@ public extension ObservableType where E: Occupiable {
      - returns: original source `Observable` of non-empty occupiable elements if it contains no empty occupiable elements.
      */
     @warn_unused_result(message="http://git.io/rxs.uo")
-    public func errorOnEmpty(error: ErrorType = RxOptionalError.EmptyOccupiable(E.self)) -> Observable<E> {
+    public func errorOnEmpty(error: Error = RxOptionalError.EmptyOccupiable(E.self)) -> Observable<E> {
         return self.map { element in
             guard element.isNotEmpty else {
                 throw error

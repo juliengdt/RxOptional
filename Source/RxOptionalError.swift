@@ -1,6 +1,6 @@
 import Foundation
 
-public enum RxOptionalError: ErrorType, CustomStringConvertible {
+public enum RxOptionalError: Error, CustomStringConvertible {
     case FoundNilWhileUnwrappingOptional(Any.Type)
     case EmptyOccupiable(Any.Type)
 

@@ -30,7 +30,7 @@ public extension ObservableType where E: OptionalType {
      - returns: original source `Observable` of non-empty elements if it contains no empty elements.
      */
     @warn_unused_result(message="http://git.io/rxs.uo")
-    public func errorOnNil(error: ErrorType = RxOptionalError.FoundNilWhileUnwrappingOptional(E.self)) -> Observable<E.Wrapped> {
+    public func errorOnNil(error: Error = RxOptionalError.FoundNilWhileUnwrappingOptional(E.self)) -> Observable<E.Wrapped> {
         return self.map { element -> E.Wrapped in
             guard let value = element.value else {
                 throw error

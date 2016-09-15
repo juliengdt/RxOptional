@@ -35,13 +35,13 @@ public extension ObservableType where E: Occupiable {
     /**
      Throws an error if the source `Observable` contains an empty occupiable element; otherwise returns original source `Observable` of non-empty occupiable elements.
 
-     - parameter error: error to throw when an empty occupiable element is encountered. Defaults to `RxOptionalError.EmptyOccupiable`.
+     - parameter error: error to throw when an empty occupiable element is encountered. Defaults to `RxOptionalError.emptyOccupiable`.
 
      - throws: `error` if an empty occupiable element is encountered.
 
      - returns: original source `Observable` of non-empty occupiable elements if it contains no empty occupiable elements.
      */
-    public func errorOnEmpty(_ error: Error = RxOptionalError.EmptyOccupiable(E.self)) -> Observable<E> {
+    public func errorOnEmpty(_ error: Error = RxOptionalError.emptyOccupiable(E.self)) -> Observable<E> {
         return self.map { element in
             guard element.isNotEmpty else {
                 throw error

@@ -22,13 +22,13 @@ public extension ObservableType where E: OptionalType {
     /**
      Throws an error if the source `Observable` contains an empty element; otherwise returns original source `Observable` of non-empty elements.
 
-     - parameter error: error to throw when an empty element is encountered. Defaults to `RxOptionalError.FoundNilWhileUnwrappingOptional`.
+     - parameter error: error to throw when an empty element is encountered. Defaults to `RxOptionalError.foundNilWhileUnwrappingOptional`.
 
      - throws: `error` if an empty element is encountered.
 
      - returns: original source `Observable` of non-empty elements if it contains no empty elements.
      */
-    public func errorOnNil(_ error: Error = RxOptionalError.FoundNilWhileUnwrappingOptional(E.self)) -> Observable<E.Wrapped> {
+    public func errorOnNil(_ error: Error = RxOptionalError.foundNilWhileUnwrappingOptional(E.self)) -> Observable<E.Wrapped> {
         return self.map { element -> E.Wrapped in
             guard let value = element.value else {
                 throw error

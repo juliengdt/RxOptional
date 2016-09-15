@@ -30,7 +30,7 @@ public extension ObservableType where E: OptionalType {
      - returns: original source `Observable` of non-empty elements if it contains no empty elements.
      */
     @warn_unused_result(message="http://git.io/rxs.uo")
-    public func errorOnNil(error: Error = RxOptionalError.FoundNilWhileUnwrappingOptional(E.self)) -> Observable<E.Wrapped> {
+    public func errorOnNil(_ error: Error = RxOptionalError.FoundNilWhileUnwrappingOptional(E.self)) -> Observable<E.Wrapped> {
         return self.map { element -> E.Wrapped in
             guard let value = element.value else {
                 throw error
@@ -47,7 +47,7 @@ public extension ObservableType where E: OptionalType {
      - returns: `Observable` of the source `Observable`'s unwrapped elements, with `nil` elements replaced by `valueOnNil`.
      */
     @warn_unused_result(message="http://git.io/rxs.uo")
-    public func replaceNilWith(valueOnNil: E.Wrapped) -> Observable<E.Wrapped> {
+    public func replaceNil(with valueOnNil: E.Wrapped) -> Observable<E.Wrapped> {
         return self.map { element -> E.Wrapped in
             guard let value = element.value else {
                 return valueOnNil
@@ -64,7 +64,7 @@ public extension ObservableType where E: OptionalType {
      - returns: `Observable` of the source `Observable`'s unwrapped elements, with `nil` elements replaced by the handler's returned non-`nil` elements.
      */
     @warn_unused_result(message="http://git.io/rxs.uo")
-    public func catchOnNil(handler: @escaping () throws -> Observable<E.Wrapped>) -> Observable<E.Wrapped> {
+    public func catchOnNil(_ handler: @escaping () throws -> Observable<E.Wrapped>) -> Observable<E.Wrapped> {
         return self.flatMap { element -> Observable<E.Wrapped> in
             guard let value = element.value else {
                 return try handler()
